@@ -1,27 +1,28 @@
 package datastructures.stack;
 
 public class Node {
-    private int data;
-    private Node sig;
-    public Node(int data, Node sig){
-        this.data=data;
-        this.sig=sig;
-    }
-    public void setData(int data) {
-        this.data = data;
-    }
+	private int data;
+	private Node sig;
 
-    public int getData() {
-        return data;
-    }
+	public Node(int data, Node sig) {
+		this.data = data;
+		this.sig = sig;
+	}
 
-    public void setSig(Node sig) {
-        this.sig = sig;
-    }
+	public void setData(int data) {
+		this.data = data;
+	}
 
-    public Node getSig() {
-        return sig;
-    }
-   
+	public int getData() {
+		return data;
+	}
+
+	public void setSig(Node sig) {
+		this.sig = sig;
+	}
+
+	public Node getSig() {
+		return sig;
+	}
 
 }

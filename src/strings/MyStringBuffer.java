@@ -1,6 +1,6 @@
 package strings;
 
-import java.util.*;
+import java.util.BitSet;
 
 public class MyStringBuffer {
 	private StringBuilder str;
@@ -71,8 +71,8 @@ public class MyStringBuffer {
 
 	/*
 	 * Given a string of lowercase letters, determine the index of the character
-	 * whose removal will make the string a palindrome. If the string is already
-	 * a palindrome, then print −1−1. There will always be a valid solution.
+	 * whose removal will make the string a palindrome. If the string is already a
+	 * palindrome, then print −1−1. There will always be a valid solution.
 	 */
 	public static int palindromeIndex(String s) {
 		int index = -1;
@@ -107,9 +107,8 @@ public class MyStringBuffer {
 	 * out this number.
 	 * 
 	 * Given two strings (they can be of same or different length) help her in
-	 * finding out the minimum number of character deletions required to make
-	 * two strings anagrams Any characters can be deleted from any of the
-	 * strings.
+	 * finding out the minimum number of character deletions required to make two
+	 * strings anagrams Any characters can be deleted from any of the strings.
 	 */
 	public static int makeItAnagram(String aIn, String bIn) {
 		int count = 0;
@@ -156,7 +155,7 @@ public class MyStringBuffer {
 		if (n == 0)
 			return "";
 		String longest = s.substring(0, 1); // a single char itself is a
-											// palindrome
+		// palindrome
 		for (int i = 0; i < n - 1; i++) {
 			String p1 = expandAroundCenter(s, i, i);
 			if (p1.length() > longest.length())
