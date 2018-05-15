@@ -1,11 +1,12 @@
 package sorting;
 
-/*
-Selection sort One of the simplest sorting algorithms works as follows: First, find
-the smallest item in the array and exchange it with the first entry (itself if the first entry
-is already the smallest). Then, find the next smallest item and exchange it with the second
-entry. Continue in this way until the entire array is sorted. This method is called
-selection sort because it works by repeatedly selecting the smallest remaining item.
+/**
+ * 
+ * Selection sort One of the simplest sorting algorithms works as follows: First, find
+ * the smallest item in the array and exchange it with the first entry (itself if the first entry
+ * is already the smallest). Then, find the next smallest item and exchange it with the second
+ * entry. Continue in this way until the entire array is sorted. This method is called
+ * selection sort because it works by repeatedly selecting the smallest remaining item.
 */
 public class SelectionSort extends SortingAlgorithm {
 	public SelectionSort() {

@@ -2,13 +2,11 @@ package sorting;
 
 public abstract class SortingAlgorithm {
 
+	
 	/**
 	 * @param a
-	 *          array to be sorted
 	 * @param i
-	 *          index i
 	 * @param j
-	 *          index j
 	 * @return
 	 */
 	protected int[] swap(int[] a, int i, int j) {

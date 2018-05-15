@@ -2,6 +2,10 @@ package strings;
 
 import java.util.BitSet;
 
+/**
+ * @author carlos
+ *
+ */
 public class MyStringBuffer {
 	private StringBuilder str;
 
@@ -19,11 +23,12 @@ public class MyStringBuffer {
 		this.str.append(str);
 	}
 
+	/**
+	 * Implement an algorithm to determine if a string has all unique characters. 
+	 * What if you cannot use additional data structures?
+	 * @return
+	 */
 	public boolean hasUniqueCharacters() {
-		/*
-		 * Implement an algorithm to determine if a string has all unique
-		 * characters. What if you cannot use additional data structures?
-		 */
 		BitSet b = new BitSet(('z' - 'a') * 2);
 		for (int i = 0; i < str.length(); i++) {
 			if (b.get(str.charAt(i) - 'a'))
@@ -33,11 +38,20 @@ public class MyStringBuffer {
 		return true;
 	}
 
-	/* Static prodecures */
-	public static boolean isRortated(String s1, String s2) {
+	/**
+	 * Function that indicates if  s2 is a rotated version of s1
+	 * @param s1
+	 * @param s2
+	 * @return True if is rotated else if not
+	 */
+	public static boolean isRotated(String s1, String s2) {
 		return s1.length() == s2.length() && (s1 + s1).contains(s2);
 	}
 
+	/**
+	 * @param s
+	 * @return
+	 */
 	public static String compressString(String s) {
 		int[] charOcurrence = new int[('z' - 'a') * 2];
 		for (int i = 0; i < s.length(); i++) {
@@ -54,6 +68,10 @@ public class MyStringBuffer {
 		return str2.toString();
 	}
 
+	/**
+	 * @param str
+	 * @return
+	 */
 	public static boolean checkIfPalindrome(String str) {
 		str = str.toLowerCase();
 		int i = 0;
@@ -68,11 +86,12 @@ public class MyStringBuffer {
 		}
 		return true;
 	}
-
-	/*
+	
+	/**
 	 * Given a string of lowercase letters, determine the index of the character
 	 * whose removal will make the string a palindrome. If the string is already a
-	 * palindrome, then print −1−1. There will always be a valid solution.
+	 * palindrome, then print . There will always be a valid solution.
+	 * @return
 	 */
 	public static int palindromeIndex(String s) {
 		int index = -1;
@@ -88,6 +107,12 @@ public class MyStringBuffer {
 		return index;
 	}
 
+	/**
+	 * 
+	 * @param s String to invert
+	 * @param n Index that should be initialized on 0
+	 * @return
+	 */
 	public static String reverseString(char[] s, int n) {
 		if (n == s.length / 2)
 			return String.valueOf(s);
@@ -99,8 +124,10 @@ public class MyStringBuffer {
 		}
 		return String.valueOf(s);
 	}
+	
+	
 
-	/*
+	/**
 	 * Alice decides on an encryption scheme involving 2 large strings where
 	 * encryption is dependent on the minimum number of character deletions
 	 * required to make the two strings anagrams. She need your help in finding
@@ -114,8 +141,8 @@ public class MyStringBuffer {
 		int count = 0;
 		String a = aIn;
 		String b = bIn;
-		int aSet[] = new int[95];
-		int bSet[] = new int[95];
+		int[] aSet = new int[95];
+		int[] bSet = new int[95];
 		for (int i = 0; i < a.length(); i++) {
 			aSet[a.charAt(i) - ' ']++;
 		}
@@ -129,6 +156,10 @@ public class MyStringBuffer {
 		return count;
 	}
 
+	/**
+	 * @param n
+	 * @return
+	 */
 	public static int getOnBits(int n) {
 		int sum = 0;
 		do {
@@ -138,10 +169,15 @@ public class MyStringBuffer {
 		return sum;
 	}
 
-	// forgeeksskeegfor
-	// 0123456789012345
+	/**
+	 * @param s
+	 * @param c1
+	 * @param c2
+	 * @return
+	 */
 	private static String expandAroundCenter(String s, int c1, int c2) {
-		int l = c1, r = c2;
+		int l = c1;
+		int r = c2;
 		int n = s.length();
 		while (l >= 0 && r < n && s.charAt(l) == s.charAt(r)) {
 			l--;
@@ -150,6 +186,10 @@ public class MyStringBuffer {
 		return s.substring(l + 1, r);
 	}
 
+	/**
+	 * @param s
+	 * @return
+	 */
 	public static String longestPalindrome(String s) {
 		int n = s.length();
 		if (n == 0)
@@ -168,11 +208,16 @@ public class MyStringBuffer {
 		return longest;
 	}
 
-	/* d is fixed lenght */
-	public static String[] orderStrings(String a[], int l) {
+	/**
+	 * d is fixed lenght
+	 * @param a
+	 * @param l
+	 * @return
+	 */
+	public static String[] orderStrings(String[] a, int l) {
 		int x = 'A'; // Offset
 		int n = a.length; // N
-		int count[];
+		int[] count;
 		String[] aux = new String[n];
 		for (int d = l - 1; d >= 0; d--) {
 			count = new int[('Z' - 'A') + 1 + 1];
