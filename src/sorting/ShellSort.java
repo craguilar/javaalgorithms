@@ -1,5 +1,8 @@
 package sorting;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /*
 Shellsort 
 To exhibit the value of knowing properties of elementary sorts, we next consider
@@ -12,6 +15,7 @@ speed by allowing exchanges of array entries that are far apart, to produce part
 sorted arrays that can be efficiently sorted, eventually by insertion sort.
 */
 public class ShellSort extends SortingAlgorithm {
+	private static final Logger LOG = Logger.getLogger(ShellSort.class.getName());
 
 	public ShellSort() {
 		super();
@@ -19,7 +23,7 @@ public class ShellSort extends SortingAlgorithm {
 
 	@Override
 	public int[] runAlgorithm(boolean showtime, int[] a) {
-		System.out.println("SHELL SORT");
+		LOG.log(Level.FINE, "SHELL SORT");
 		if (showtime) {
 			long startTime;
 			long stopTime;
@@ -28,22 +32,23 @@ public class ShellSort extends SortingAlgorithm {
 			sort(a);
 			stopTime = System.currentTimeMillis();
 			elapsedTime = stopTime - startTime;
-			System.out.println("Elapsed time=" + elapsedTime + "[ms]");
-		} else
+			LOG.log(Level.FINE, "Elapsed time= {0} [ms]", elapsedTime);
+		} else {
 			sort(a);
+		}
 
 		return a;
 	}
 
 	@Override
 	public int[] sort(int[] a) {
-		int N = a.length;
+		int n = a.length;
 		int h = 1;
-		while (h < N / 3)
+		while (h < n / 3)
 			h = 3 * h + 1;
 
 		while (h >= 1) { // h-sort the array.
-			for (int i = h; i < N; i++) { // Insert a[i] among a[i-h], a[i-2*h],
+			for (int i = h; i < n; i++) { // Insert a[i] among a[i-h], a[i-2*h],
 				// a[i-3*h]... .
 
 				for (int j = i; j >= h && a[j] < a[j - h]; j -= h) {
