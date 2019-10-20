@@ -1,1 +1,9 @@
 **/build/*
+**/bin/*
+**/target/*
+# Files used for formatting
+.checkstyle
+.project
+.classpath
+.gradle
+.settings/*
