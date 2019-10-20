@@ -2,6 +2,7 @@
 **/bin/*
 **/target/*
 # Files used for formatting
+.vscode/*
 .checkstyle
 .project
 .classpath
