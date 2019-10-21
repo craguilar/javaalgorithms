@@ -68,7 +68,6 @@ public class NumberAlgorithms {
         if (number % i == 0) {
           largestPrimeFactor = i;
           number = number / largestPrimeFactor;
-          System.out.println("Min prime factor " + largestPrimeFactor + "  new number " + number);
           break;
         }
       }
@@ -76,8 +75,5 @@ public class NumberAlgorithms {
     return largestPrimeFactor;
   }
 
-  public static void main(String[] args) {
-    NumberAlgorithms.findLargestPrimeFactor(3);
-  }
 
 }
