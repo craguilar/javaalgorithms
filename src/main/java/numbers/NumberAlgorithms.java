@@ -3,7 +3,7 @@ package numbers;
 import java.util.HashSet;
 import java.util.Set;
 
-public class IntegerAlgorithms {
+public class NumberAlgorithms {
 
   /**
    * If we list all the natural numbers below 10 that are multiples of 3 or 5,
@@ -37,7 +37,7 @@ public class IntegerAlgorithms {
     int previous = 0;
     int currentFibo = 1;
     while (currentFibo < maxFiboEligible) {
-      
+
       if (currentFibo % 2 == 0) {
         sum += currentFibo;
       }
@@ -46,6 +46,38 @@ public class IntegerAlgorithms {
       previous = tempCurrentFibo;
     }
     return sum;
+  }
+
+  /**
+   * Larget prime factor . The prime factors of 13195 are 5, 7, 13 and 29.
+   * 
+   * What is the largest prime factor of the number
+   */
+  public static long findLargestPrimeFactor(long number) {
+    int largestPrimeFactor = -1;
+    while (number > 1) {
+      for (int i = 0; i < PrimeConstants.UPTO100_PRIME_FACTORS.length; i++) {
+        if (number % PrimeConstants.UPTO100_PRIME_FACTORS[i] == 0) {
+          largestPrimeFactor = PrimeConstants.UPTO100_PRIME_FACTORS[i];
+          number = number / largestPrimeFactor;
+          
+          break;
+        }
+      }
+      for (int i = 101; i <= number; i++) {
+        if (number % i == 0) {
+          largestPrimeFactor = i;
+          number = number / largestPrimeFactor;
+          System.out.println("Min prime factor " + largestPrimeFactor + "  new number " + number);
+          break;
+        }
+      }
+    }
+    return largestPrimeFactor;
+  }
+
+  public static void main(String[] args) {
+    NumberAlgorithms.findLargestPrimeFactor(3);
   }
 
 }
