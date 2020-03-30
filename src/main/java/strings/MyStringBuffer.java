@@ -125,8 +125,6 @@ public class MyStringBuffer {
 		return String.valueOf(s);
 	}
 	
-	
-
 	/**
 	 * Alice decides on an encryption scheme involving 2 large strings where
 	 * encryption is dependent on the minimum number of character deletions
