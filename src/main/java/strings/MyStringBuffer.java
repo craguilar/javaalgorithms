@@ -24,8 +24,9 @@ public class MyStringBuffer {
 	}
 
 	/**
-	 * Implement an algorithm to determine if a string has all unique characters. 
+	 * Implement an algorithm to determine if a string has all unique characters.
 	 * What if you cannot use additional data structures?
+	 * 
 	 * @return
 	 */
 	public boolean hasUniqueCharacters() {
@@ -39,7 +40,8 @@ public class MyStringBuffer {
 	}
 
 	/**
-	 * Function that indicates if  s2 is a rotated version of s1
+	 * Function that indicates if s2 is a rotated version of s1
+	 * 
 	 * @param s1
 	 * @param s2
 	 * @return True if is rotated else if not
@@ -86,11 +88,12 @@ public class MyStringBuffer {
 		}
 		return true;
 	}
-	
+
 	/**
 	 * Given a string of lowercase letters, determine the index of the character
 	 * whose removal will make the string a palindrome. If the string is already a
 	 * palindrome, then print . There will always be a valid solution.
+	 * 
 	 * @return
 	 */
 	public static int palindromeIndex(String s) {
@@ -109,8 +112,10 @@ public class MyStringBuffer {
 
 	/**
 	 * 
-	 * @param s String to invert
-	 * @param n Index that should be initialized on 0
+	 * @param s
+	 *          String to invert
+	 * @param n
+	 *          Index that should be initialized on 0
 	 * @return
 	 */
 	public static String reverseString(char[] s, int n) {
@@ -124,7 +129,7 @@ public class MyStringBuffer {
 		}
 		return String.valueOf(s);
 	}
-	
+
 	/**
 	 * Alice decides on an encryption scheme involving 2 large strings where
 	 * encryption is dependent on the minimum number of character deletions
@@ -208,6 +213,7 @@ public class MyStringBuffer {
 
 	/**
 	 * d is fixed lenght
+	 * 
 	 * @param a
 	 * @param l
 	 * @return

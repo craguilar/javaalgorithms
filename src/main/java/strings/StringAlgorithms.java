@@ -1,18 +1,119 @@
 package strings;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Queue;
 import java.util.Set;
 
+import org.apache.commons.lang3.tuple.Pair;
+
 public class StringAlgorithms {
+
+  /**
+   * Given two words (beginWord and endWord), and a dictionary's word list, find
+   * the length of shortest transformation sequence from beginWord to endWord,
+   * such that:
+   * <ul>
+   * <li>Only one letter can be changed at a time. Each transformed word must
+   * exist.</li>
+   * <li>in the word list. Note that beginWord is not a transformed word.</li>
+   * <ul>
+   * 
+   * @param beginWord 
+   * @param endWord
+   * @param wordList
+   * @return length of the shortest path.
+   */
+  public static  int ladderLength(String beginWord, String endWord, List<String> wordList) {
+    List<String> wordListFinal = new ArrayList<>(wordList);
+    Map<String, Set<String>> graph = createGraph(beginWord, endWord, wordListFinal);
+    return bfs(graph, beginWord, endWord);
+  }
+
+  private static Map<String, Set<String>> createGraph(String beginWord, String endWord, List<String> wordList) {
+    Map<String, Set<String>> graph = new HashMap<>();
+    if (!wordList.contains(beginWord)) {
+      wordList.add(0, beginWord);
+    }
+    for (int i = 0; i < wordList.size(); i++) {
+      String currentWord = wordList.get(i);
+      Set<String> neighbors = new HashSet<>();
+      graph.put(currentWord, neighbors);
+      for (int j = 0; j < wordList.size(); j++) {
+        boolean isOneLetterAway = isOneLetterAway(currentWord, wordList.get(j));
+        boolean isNotSameWord = !currentWord.equals(wordList.get(j));
+        if (isNotSameWord && isOneLetterAway) {
+          graph.get(currentWord).add(wordList.get(j));
+        }
+      }
+    }
+    return graph;
+  }
+
+  private static int bfs(Map<String, Set<String>> graph, String beginWord, String endWord) {
+
+    Set<String> visited = new HashSet<>();
+    Queue<Pair<String, Integer>> queue = new LinkedList<>();
+    queue.add(Pair.of(beginWord, 1));
+    while (!queue.isEmpty()) {
+      Pair<String, Integer> currentNode = queue.poll();
+      String current = currentNode.getKey();
+      int level = currentNode.getValue();
+      if (!current.equals(endWord) && !visited.contains(current)) {
+        Set<String> neighbors = graph.get(current);
+        visited.add(current);
+        for (String neighbor : neighbors) {
+          queue.add(Pair.of(neighbor, level + 1));
+        }
+      } else if (current.equals(endWord)) {
+        return level;
+      }
+    }
+    return 0;
+
+  }
+
+  private static boolean isOneLetterAway(String s1, String s2) {
+    int m = s1.length();
+    int n = s2.length();
+    if (Math.abs(m - n) > 1)
+      return false;
+
+    int count = 0; // Count of edits
+    int i = 0, j = 0;
+    while (i < m && j < n) {
+      // If current characters don't match
+      if (s1.charAt(i) != s2.charAt(j)) {
+        if (count == 1)
+          return false;
+        i++;
+        j++;
+        count++;
+      } else {
+        i++;
+        j++;
+      }
+    }
+
+    if (i < m || j < n)
+      count++;
+
+    return count == 1;
+  }
 
   /**
    * Given a string, find the length of the longest substring without repeating
    * characters.
    * 
-   * @param s where search of longest longest substring without repeating
-   *          characters will happen 
+   * @param s
+   *          where search of longest longest substring without repeating
+   *          characters will happen
    * @return length of the longest substring.
    */
   public static int lengthOfLongestSubstring(final String s) {
@@ -87,13 +188,14 @@ public class StringAlgorithms {
 
   /**
    * Given a string, return the sum of the numbers appearing in the string,
-   * ignoring all other characters. A number is a series of 1 or more digit chars
-   * in a row. (Note: Character.isDigit(char) tests if a char is one of the chars
-   * '0', '1', .. '9'. Integer.parseInt(string) converts a string to an int.)
+   * ignoring all other characters. A number is a series of 1 or more digit
+   * chars in a row. (Note: Character.isDigit(char) tests if a char is one of
+   * the chars '0', '1', .. '9'. Integer.parseInt(string) converts a string to
+   * an int.)
    * 
    * 
-   * sumNumbers("abc123xyz") → 123 sumNumbers("aa11b33") → 44 sumNumbers("7 11") →
-   * 18
+   * sumNumbers("abc123xyz") → 123 sumNumbers("aa11b33") → 44 sumNumbers("7 11")
+   * → 18
    */
 
   public static boolean isSubsequence(final String target, final String word) {

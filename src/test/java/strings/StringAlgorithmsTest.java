@@ -2,9 +2,18 @@ package strings;
 
 import static org.junit.Assert.*;
 
+import java.util.Arrays;
+
 import org.junit.Test;
 
 public class StringAlgorithmsTest {
+
+  @Test
+  public void ladderLengthTest(){
+    int length = StringAlgorithms.ladderLength("hit", "cog", Arrays.asList("hot","dot","dog","lot","log","cog"));
+    assertEquals(5,length);
+  }
+
 
   @Test
   public void findLongestWordWhichIsASubsequenceTest() {
