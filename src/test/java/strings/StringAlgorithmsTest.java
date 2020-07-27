@@ -25,10 +25,12 @@ public class StringAlgorithmsTest {
 
   @Test
   public void lengthOfLongestSubstring(){
+    // TODO : Add jmh
     assertEquals(1,StringAlgorithms.lengthOfLongestSubstring("a"));
     assertEquals(1, StringAlgorithms.lengthOfLongestSubstring("aaaaa"));
     assertEquals(3, StringAlgorithms.lengthOfLongestSubstring("abcabc"));
     assertEquals(3, StringAlgorithms.lengthOfLongestSubstring("abac"));
+    assertEquals(3, StringAlgorithms.lengthOfLongestSubstring("pwwkew"));
   }
 
 

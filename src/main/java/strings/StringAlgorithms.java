@@ -117,31 +117,23 @@ public class StringAlgorithms {
    * @return length of the longest substring.
    */
   public static int lengthOfLongestSubstring(final String s) {
+    int begin = 0;
+    int end = 0;
     int max = 0;
-    int beginWindow = 0;
-    int endWindow = 0;
-    for (int i = 0; i < s.length(); i++) {
-
-      // On each iteration I need to keep a state of chars for that , I use
-      // bag I expand the window with while and bag contains and then reduce
-      // the begin window on if endWindow less than s lenth
-      final Set<Character> bag = new HashSet<>();
-      int currentMax = 0;
-      endWindow = beginWindow;
-      while (endWindow < s.length() && !bag.contains(s.charAt(endWindow))) {
-        bag.add(s.charAt(endWindow));
-        currentMax++;
-        endWindow++;
-      }
-      if (endWindow < s.length()) {
-        final Character toRemove = s.charAt(endWindow);
-        while (beginWindow < s.length() && bag.contains(toRemove)) {
-          bag.remove(s.charAt(beginWindow));
-          beginWindow++;
+    Set<Character> bag = new HashSet<>();
+    while (end < s.length()) {
+      Character currentChar = s.charAt(end);
+      if (!bag.contains(currentChar)) {
+        bag.add(currentChar);
+      } else {
+        while (bag.contains(currentChar)) {
+          bag.remove(s.charAt(begin));
+          begin++;
         }
+        bag.add(currentChar);
       }
-
-      max = Math.max(max, currentMax);
+      end++;
+      max = Math.max(max, end - begin);
     }
     return max;
   }
