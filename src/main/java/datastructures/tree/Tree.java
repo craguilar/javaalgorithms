@@ -4,7 +4,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 public class Tree {
-	Node root;
+	BinaryTreeNode root;
 	private static int pIndex = 0;
 
 	public Tree() {
@@ -22,9 +22,9 @@ public class Tree {
 
 	// PRE ORDER=[F, B, A, D, C, E, G, I, H]
 	// IN ORDER=[A, B, C, D, E, F, G, H, I]
-	private Node createTreeFromPreInOrder(int[] preOrder, int[] inOrder, int left, int right) {
+	private BinaryTreeNode createTreeFromPreInOrder(int[] preOrder, int[] inOrder, int left, int right) {
 		int current = -1;
-		Node n;
+		BinaryTreeNode n;
 		if (left > right)
 			return null;
 		// Get Current value in inOrder array.
@@ -34,7 +34,7 @@ public class Tree {
 				break;
 			}
 		}
-		n = new Node(preOrder[pIndex++]);
+		n = new BinaryTreeNode(preOrder[pIndex++]);
 		if (left == right)
 			return n;
 		n.setLeft(createTreeFromPreInOrder(preOrder, inOrder, left, current - 1));
@@ -42,12 +42,12 @@ public class Tree {
 		return n;
 	}
 
-	private Node sortedArraytoTree(int[] a, int left, int right) {
-		Node n = null;
+	private BinaryTreeNode sortedArraytoTree(int[] a, int left, int right) {
+		BinaryTreeNode n = null;
 		int k = (left + right) / 2;
 		if (right < left)
 			return n;
-		n = new Node(Integer.toString(a[k]));
+		n = new BinaryTreeNode(a[k]);
 		n.setLeft(sortedArraytoTree(a, left, k - 1));
 		n.setRight(sortedArraytoTree(a, k + 1, right));
 		return n;
@@ -62,13 +62,12 @@ public class Tree {
 		return isBST(root, Integer.MIN_VALUE, Integer.MAX_VALUE);
 	}
 
-	private boolean isBST(Node node, int min, int max) {
+	private boolean isBST(BinaryTreeNode node, int min, int max) {
 		if (node == null)
 			return true;
-		if (Integer.parseInt(node.getValue()) <= min || Integer.parseInt(node.getValue()) > max)
+		if (node.getValue() <= min || node.getValue() > max)
 			return false;
-		if (!isBST(node.getLeft(), min, Integer.parseInt(node.getValue()))
-				|| !isBST(node.getRight(), Integer.parseInt(node.getValue()), max))
+		if (!isBST(node.getLeft(), min, node.getValue()) || !isBST(node.getRight(), node.getValue(), max))
 			return false;
 		return true;
 	}
@@ -99,7 +98,7 @@ public class Tree {
 		printTrasversal(root, "POS");
 	}
 
-	private void printTrasversal(Node root, String mode) {
+	private void printTrasversal(BinaryTreeNode root, String mode) {
 		if (root == null)
 			return;
 		if ("PRE".equals(mode))
@@ -117,28 +116,28 @@ public class Tree {
 	 * \ / 2 7 \ 3 v1=1, v2=3
 	 */
 
-	public Node lca(Node root, int v1, int v2) {
+	public BinaryTreeNode lca(BinaryTreeNode root, int v1, int v2) {
 
-		if (Integer.parseInt(root.getValue()) > v2 && Integer.parseInt(root.getValue()) > v1) {
+		if (root.getValue() > v2 && root.getValue() > v1) {
 			return lca(root.getLeft(), v1, v2);
-		} else if (Integer.parseInt(root.getValue()) < v1 && Integer.parseInt(root.getValue()) < v2) {
+		} else if (root.getValue() < v1 && root.getValue() < v2) {
 			return lca(root.getRight(), v1, v2);
 		}
 		return root;
 
 	}
 
-	public int height(Node root) {
+	public int height(BinaryTreeNode root) {
 		if (root == null)
 			return 0;
 		return 1 + Math.max(height(root.getLeft()), height(root.getRight()));
 	}
 
-	public int heightNonRecursive(Node root) {
+	public int heightNonRecursive(BinaryTreeNode root) {
 		int height = 0;
-		Queue<Node> toVisit;
-		Queue<Node> visited;
-		Node n;
+		Queue<BinaryTreeNode> toVisit;
+		Queue<BinaryTreeNode> visited;
+		BinaryTreeNode n;
 		// Initialization
 		toVisit = new LinkedList<>();
 		visited = new LinkedList<>();
@@ -163,11 +162,11 @@ public class Tree {
 	}
 
 	// -- Accessors
-	public void setRoot(Node root) {
+	public void setRoot(BinaryTreeNode root) {
 		this.root = root;
 	}
 
-	public Node getRoot() {
+	public BinaryTreeNode getRoot() {
 		return root;
 	}
 }

@@ -1,9 +1,9 @@
 package cache;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class LRUCache {
 
@@ -12,7 +12,7 @@ public class LRUCache {
    */
   private List<Integer> usedList = new ArrayList<>();
 
-  private Map<Integer, Integer> cache = new HashMap<>();
+  private Map<Integer, Integer> cache = new ConcurrentHashMap<>();
 
   private int capacity;
 
