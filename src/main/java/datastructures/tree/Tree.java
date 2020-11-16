@@ -1,16 +1,31 @@
 package datastructures.tree;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 
 public class Tree {
-	BinaryTreeNode root;
+
+	private BinaryTreeNode root;
 	private static int pIndex = 0;
 
 	public Tree() {
 		super();
 	}
 
+	public Tree(BinaryTreeNode root) {
+		super();
+		this.root = root;
+	}
+
+	/**
+	 * Build the tree from a sorted array
+	 * 
+	 * @param a
+	 *          sorted array
+	 */
 	public Tree(int[] a) {
 		root = sortedArraytoTree(a, 0, a.length - 1);
 	}
@@ -20,8 +35,10 @@ public class Tree {
 		root = createTreeFromPreInOrder(preOrder, inOrder, pIndex, inOrder.length - 1);
 	}
 
-	// PRE ORDER=[F, B, A, D, C, E, G, I, H]
-	// IN ORDER=[A, B, C, D, E, F, G, H, I]
+	/**
+	 * Example , PRE ORDER=[F, B, A, D, C, E, G, I, H] and IN ORDER=[A, B, C, D,
+	 * E, F, G, H, I]
+	 */
 	private BinaryTreeNode createTreeFromPreInOrder(int[] preOrder, int[] inOrder, int left, int right) {
 		int current = -1;
 		BinaryTreeNode n;
@@ -53,12 +70,16 @@ public class Tree {
 		return n;
 	}
 
+	/**
+	 * Implement a function to check if a binary tree is a binary search tree. A
+	 * binary search tree imposes the condition that, for all nodes, the left
+	 * children are less than or equal to the current node, which is less that all
+	 * the right nodes.
+	 * 
+	 * @return
+	 */
 	public boolean isBST() {
-		// Implement a function to check if a binary tree is a binary search tree.
-		// A binary search tree imposes the condition that, for all nodes, the left
-		// children are less than or equal to the current node, which is less that
-		// all
-		// the right nodes.
+
 		return isBST(root, Integer.MIN_VALUE, Integer.MAX_VALUE);
 	}
 
@@ -72,56 +93,112 @@ public class Tree {
 		return true;
 	}
 
+	public static String serialize(BinaryTreeNode root) {
+		StringBuilder sb = new StringBuilder();
+		serializeHelper(root, sb);
+		return removeLastCharFromString(sb.toString());
+	}
+
+	public static BinaryTreeNode deserialize(String str) {
+		List<String> values = new ArrayList<>(Arrays.asList(str.split(",")));
+		return deserializeHelper(values);
+	}
+
+	private static void serializeHelper(BinaryTreeNode node, StringBuilder sb) {
+		if (node == null) {
+			sb.append("null,");
+			return;
+		}
+		sb.append(node.getValue() + ",");
+		serializeHelper(node.getLeft(), sb);
+		serializeHelper(node.getRight(), sb);
+	}
+
+	public static BinaryTreeNode deserializeHelper(List<String> values) {
+		if("null".equalsIgnoreCase(values.get(0))){
+			values.remove(0);
+			return null;
+		}
+		BinaryTreeNode node = new BinaryTreeNode(Integer.valueOf(values.get(0)));
+		values.remove(0);
+		BinaryTreeNode left  = deserializeHelper(values);
+		BinaryTreeNode right  = deserializeHelper(values);
+		node.setLeft(left);
+		node.setRight(right);
+		return node ;
+	}
+
 	// -- Tree trasversal
-	public void preorderTraversal() {
+	public String preorderTraversal() {
 		/*
 		 * root -> left -> right Display the data part of root element (or current
 		 * element) Traverse the left subtree by recursively calling the pre-order
 		 * function. Traverse the right subtree by recursively calling the pre-order
 		 * function.
 		 */
-		printTrasversal(root, "PRE");
+		StringBuffer result = new StringBuffer();
+		printTrasversal(root, "PRE", result);
+		return removeLastCharFromString(result.toString());
 	}
 
-	public void inorderTransversal() {
+	public String inorderTransversal() {
 		/*
 		 * left ->root ->right Traverse the left subtree by recursively calling the
 		 * in-order function. Display the data part of root element (or current
 		 * element). Traverse the right subtree by recursively calling the in-order
 		 * function.
 		 */
-		printTrasversal(root, "IN");
+		StringBuffer result = new StringBuffer();
+		printTrasversal(root, "IN", result);
+		return removeLastCharFromString(result.toString());
 	}
 
-	public void postorderTrasversal() {
+	public String postorderTrasversal() {
 		/* left ->right ->root */
-		printTrasversal(root, "POS");
+		StringBuffer result = new StringBuffer();
+		printTrasversal(root, "POS", result);
+		return removeLastCharFromString(result.toString());
 	}
 
-	private void printTrasversal(BinaryTreeNode root, String mode) {
-		if (root == null)
+	private void printTrasversal(BinaryTreeNode root, String mode, StringBuffer sb) {
+		if (root == null) {
 			return;
-		if ("PRE".equals(mode))
-			System.out.print(" " + root.getValue() + " ");// Pre Orden
-		printTrasversal(root.getLeft(), mode);
-		if ("IN".equals(mode))
-			System.out.print(" " + root.getValue() + " "); // In Orden
-		printTrasversal(root.getRight(), mode);
-		if ("POS".equals(mode))
-			System.out.print(" " + root.getValue() + " "); // Post Orden
+		}
+		if ("PRE".equals(mode)) {
+			System.out.print(root.getValue() + ",");
+			sb.append(root.getValue() + ",");
+		}
+		// Pre Order
+		printTrasversal(root.getLeft(), mode, sb);
+		if ("IN".equals(mode)) {
+			System.out.print(root.getValue() + ",");
+			sb.append(root.getValue() + ",");
+		}
+		// In Order
+		printTrasversal(root.getRight(), mode, sb);
+		if ("POS".equals(mode)) {
+			System.out.print(root.getValue() + ","); // Post Order
+			sb.append(root.getValue() + ",");
+		}
 
 	}
-	/*
-	 * Node is defined as : class Node int data; Node left; Node right; 4 / \ 1 8
-	 * \ / 2 7 \ 3 v1=1, v2=3
-	 */
 
-	public BinaryTreeNode lca(BinaryTreeNode root, int v1, int v2) {
+	private static String removeLastCharFromString(String str) {
+		if (str.isEmpty()) {
+			return "";
+		}
+		// a -> ""
+		// aa -> "a"
+		// aaa -> "aa"
+		return str.substring(0, str.length() - 1);
+	}
+
+	public BinaryTreeNode lowestCommonAntecesor(BinaryTreeNode root, int v1, int v2) {
 
 		if (root.getValue() > v2 && root.getValue() > v1) {
-			return lca(root.getLeft(), v1, v2);
+			return lowestCommonAntecesor(root.getLeft(), v1, v2);
 		} else if (root.getValue() < v1 && root.getValue() < v2) {
-			return lca(root.getRight(), v1, v2);
+			return lowestCommonAntecesor(root.getRight(), v1, v2);
 		}
 		return root;
 
