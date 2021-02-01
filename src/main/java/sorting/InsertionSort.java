@@ -8,34 +8,34 @@ package sorting;
  * inserting the current item into the vacated position.
 */
 public class InsertionSort extends SortingAlgorithm {
-	public InsertionSort() {
-		super();
-	}
+  public InsertionSort() {
+    super();
+  }
 
-	public int[] insertionSortAlgorithm(int[] a) {
-	
-		for (int i = 0; i < a.length - 1; i++) {
-			if (a[i] > a[i + 1]) {
-				for (int j = i + 1; j > 0; j--) {
-					if (a[j] < a[j - 1])
-						swap(a, j, j - 1);
-					else
-						break; // improves T
-				}
-			}
-		}
-		return a;
-	}
+  public int[] insertionSortAlgorithm(int[] a) {
+  
+    for (int i = 0; i < a.length - 1; i++) {
+      if (a[i] > a[i + 1]) {
+        for (int j = i + 1; j > 0; j--) {
+          if (a[j] < a[j - 1])
+            swap(a, j, j - 1);
+          else
+            break; // improves T
+        }
+      }
+    }
+    return a;
+  }
 
-	@Override
-	public int[] sort(int[] a) {
-		insertionSortAlgorithm(a);
-		return a;
-	}
+  @Override
+  public int[] sort(int[] a) {
+    insertionSortAlgorithm(a);
+    return a;
+  }
 
-	@Override
-	public int[] runAlgorithm(boolean showtime, int[] a) {
-		return insertionSortAlgorithm(a);
-	}
+  @Override
+  public int[] runAlgorithm(boolean showtime, int[] a) {
+    return insertionSortAlgorithm(a);
+  }
 
 }

@@ -30,7 +30,7 @@ public class StringAlgorithms {
    * @param wordList
    * @return length of the shortest path.
    */
-  public static  int ladderLength(String beginWord, String endWord, List<String> wordList) {
+  public static   int ladderLength(String beginWord, String endWord, List<String> wordList) {
     List<String> wordListFinal = new ArrayList<>(wordList);
     Map<String, Set<String>> graph = createGraph(beginWord, endWord, wordListFinal);
     return bfs(graph, beginWord, endWord);

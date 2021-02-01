@@ -15,50 +15,50 @@ speed by allowing exchanges of array entries that are far apart, to produce part
 sorted arrays that can be efficiently sorted, eventually by insertion sort.
 */
 public class ShellSort extends SortingAlgorithm {
-	private static final Logger LOG = Logger.getLogger(ShellSort.class.getName());
+  private static final Logger LOG = Logger.getLogger(ShellSort.class.getName());
 
-	public ShellSort() {
-		super();
-	}
+  public ShellSort() {
+    super();
+  }
 
-	@Override
-	public int[] runAlgorithm(boolean showtime, int[] a) {
-		LOG.log(Level.FINE, "SHELL SORT");
-		if (showtime) {
-			long startTime;
-			long stopTime;
-			long elapsedTime;
-			startTime = System.currentTimeMillis();
-			sort(a);
-			stopTime = System.currentTimeMillis();
-			elapsedTime = stopTime - startTime;
-			LOG.log(Level.FINE, "Elapsed time= {0} [ms]", elapsedTime);
-		} else {
-			sort(a);
-		}
+  @Override
+  public int[] runAlgorithm(boolean showtime, int[] a) {
+    LOG.log(Level.FINE, "SHELL SORT");
+    if (showtime) {
+      long startTime;
+      long stopTime;
+      long elapsedTime;
+      startTime = System.currentTimeMillis();
+      sort(a);
+      stopTime = System.currentTimeMillis();
+      elapsedTime = stopTime - startTime;
+      LOG.log(Level.FINE, "Elapsed time= {0} [ms]", elapsedTime);
+    } else {
+      sort(a);
+    }
 
-		return a;
-	}
+    return a;
+  }
 
-	@Override
-	public int[] sort(int[] a) {
-		int n = a.length;
-		int h = 1;
-		while (h < n / 3)
-			h = 3 * h + 1;
+  @Override
+  public int[] sort(int[] a) {
+    int n = a.length;
+    int h = 1;
+    while (h < n / 3)
+      h = 3 * h + 1;
 
-		while (h >= 1) { // h-sort the array.
-			for (int i = h; i < n; i++) { // Insert a[i] among a[i-h], a[i-2*h],
-				// a[i-3*h]... .
+    while (h >= 1) { // h-sort the array.
+      for (int i = h; i < n; i++) { // Insert a[i] among a[i-h], a[i-2*h],
+        // a[i-3*h]... .
 
-				for (int j = i; j >= h && a[j] < a[j - h]; j -= h) {
-					swap(a, j, j - h);
-				}
+        for (int j = i; j >= h && a[j] < a[j - h]; j -= h) {
+          swap(a, j, j - h);
+        }
 
-			}
-			h = h / 3;
-		}
-		return a;
-	}
+      }
+      h = h / 3;
+    }
+    return a;
+  }
 
 }
