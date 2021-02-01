@@ -12,12 +12,12 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 
 @Slf4j
-public class BlockingQueueTest {
+public class BlockingQueueMonitorTest {
 
   @Test
   public void testCorrectnessWithThreads() throws InterruptedException {
 
-    final BlockingQueue<Integer> queue = new BlockingQueue<Integer>(5);
+    final BlockingQueue<Integer> queue = new BlockingQueueMonitor<Integer>(5);
 
     Thread t1 = new Thread(new Runnable() {
 
@@ -71,13 +71,13 @@ public class BlockingQueueTest {
     t1.join();
     t3.join();
 
-    assertTrue(queue.getTail() == queue.getHead());
+    assertTrue(queue.isEmpty());
   }
 
   @Test
   public void testCorrectnessWithExecutorServiceWithRightPool() throws InterruptedException, ExecutionException {
 
-    final BlockingQueue<Integer> queue = new BlockingQueue<Integer>(5);
+    final BlockingQueue<Integer> queue = new BlockingQueueMonitor<Integer>(5);
 
     ExecutorService executor = Executors.newFixedThreadPool(3);
 
@@ -131,13 +131,13 @@ public class BlockingQueueTest {
     resultProducer.get();
     resultConsumer2.get();
 
-    assertTrue(queue.getTail() == queue.getHead());
+    assertTrue(queue.isEmpty());
   }
 
   @Test
   public void testCorrectnessWithExecutorServiceWithNotStarvingPool() throws InterruptedException, ExecutionException {
 
-    final BlockingQueue<Integer> queue = new BlockingQueue<Integer>(5);
+    final BlockingQueue<Integer> queue = new BlockingQueueMonitor<Integer>(5);
 
     ExecutorService executor = Executors.newFixedThreadPool(2);
 
@@ -191,6 +191,6 @@ public class BlockingQueueTest {
     resultProducer.get();
     resultConsumer2.get();
 
-    assertTrue(queue.getTail() == queue.getHead());
+    assertTrue(queue.isEmpty());
   }
 }
