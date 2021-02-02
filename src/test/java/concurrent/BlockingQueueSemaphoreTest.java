@@ -1,6 +1,9 @@
 package concurrent;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+
+import java.util.concurrent.Semaphore;
 
 import org.junit.Test;
 
@@ -8,6 +11,25 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class BlockingQueueSemaphoreTest {
+
+  @Test
+  public void testSemaphoreJavaBehavior() throws InterruptedException {
+    Semaphore semaphore = new Semaphore(3);
+    assertEquals(3, semaphore.availablePermits());
+    semaphore.acquire();
+    assertEquals(2, semaphore.availablePermits());
+    semaphore.acquire();
+    assertEquals(1, semaphore.availablePermits());
+    semaphore.acquire();
+    assertEquals(0, semaphore.availablePermits());
+    semaphore.release();
+    semaphore.release();
+    semaphore.release();
+    assertEquals(3, semaphore.availablePermits());
+    semaphore.release();
+    // ? ;)
+    assertEquals(4, semaphore.availablePermits());
+  }
 
   @Test
   public void testCorrectnessWithThreads() throws InterruptedException {
