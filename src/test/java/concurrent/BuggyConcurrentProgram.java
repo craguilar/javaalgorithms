@@ -11,7 +11,8 @@ public class BuggyConcurrentProgram {
   @Test(expected = AssertionError.class)
   public void testCorrectnessWithThreads() throws InterruptedException {
 
-    for (int i = 0; i < 10; i++) {
+    // The higher the iterations the most probable we will always hit an error
+    for (int i = 0; i < 15; i++) {
       testCaseExecutionAndAssert0();
     }
 

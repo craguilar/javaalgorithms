@@ -20,7 +20,7 @@ package percolation.test;
 
 import java.awt.Font;
 
-import algs.percolation.Percolation;
+import algorithms.percolation.Percolation;
 import edu.princeton.cs.algs4.In;
 import edu.princeton.cs.algs4.StdDraw;
 
