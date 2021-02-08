@@ -5,7 +5,11 @@ import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * Class was provided in Educative course "Java Multithreading for Senior
- * Engineering Interviews"
+ * Engineering Interviews" from educative.io.
+ * 
+ * A Mutex as the name hints implies mutual exclusion. A mutex is used to guard
+ * shared data such as a linked-list, an array or any primitive type. A mutex
+ * allows only a single thread to access a resource or critical section.
  */
 public class BlockingQueueMutex<T> implements BlockingQueue<T> {
 

@@ -1,7 +1,14 @@
 package concurrent;
 
 /**
+ * Implementation of {@link CountingSemaphore} was copied from educative.io.
  * 
+ * From Wikipedia ... a semaphore is a variable or abstract data type used to
+ * control access to a common resource by multiple processes and avoid critical
+ * section problems in a concurrent system such as a multitasking operating
+ * system. A trivial semaphore is a plain variable that is changed (for example,
+ * incremented or decremented, or toggled) depending on programmer-defined
+ * conditions.
  */
 public class BlockingQueueSemaphore<T> implements BlockingQueue<T> {
 
@@ -11,10 +18,28 @@ public class BlockingQueueSemaphore<T> implements BlockingQueue<T> {
   private int head = 0;
   private int tail = 0;
 
+  /**
+   * We use semLock as a mutual exlcusion lock.A semaphore initialized to one,
+   * and which is used such that it only has at most one permit available, can
+   * serve as a mutual exclusion lock. This is more commonly known as a binary
+   * semaphore, because it only has two states: one permit available, or zero
+   * permits available. When used in this way, the binary semaphore has the
+   * property (unlike many Lock implementations), that the "lock" can be
+   * released by a thread other than the owner (as semaphores have no notion of
+   * ownership). This can be useful in some specialized contexts, such as
+   * deadlock recovery.
+   */
   private CountingSemaphore semLock = new CountingSemaphore(1, 1);
   private CountingSemaphore semProducer;
   private CountingSemaphore semConsumer;
 
+  /**
+   * We initialize a consumer semaphore with same capacity as the producer but
+   * with no available resource, this will help us "block" the consumer when
+   * there are no elements enqueued
+   * 
+   * @param capacity
+   */
   @SuppressWarnings("unchecked")
   public BlockingQueueSemaphore(int capacity) {
     // Restriction with generics:
