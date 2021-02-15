@@ -3,15 +3,11 @@ package algorithms.ratelimiter;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.Map;
+
 import java.util.Optional;
-import java.util.UUID;
+
 import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.TimeUnit;
-
-import lombok.AllArgsConstructor;
 
 /**
  * Super naive implementation , what came to my mind while preparing coffee. I
@@ -19,12 +15,12 @@ import lombok.AllArgsConstructor;
  * familiar with the problem/
  * 
  */
-public class RateLimiterTokenBucketWithMap extends RateLimiter {
+public class RateLimiterTokenBucketMapBased extends RateLimiter {
 
-  private ConcurrentHashMap<String, Instant> tokens;
+  private final ConcurrentHashMap<String, Instant> tokens;
 
   // java.util.concurrent.TimeUnit
-  public RateLimiterTokenBucketWithMap(int capacity, Duration limitForPeriod) {
+  public RateLimiterTokenBucketMapBased(int capacity, Duration limitForPeriod) {
     super(capacity, limitForPeriod);
     // Initializa to half of the required capacity , default initial capacity
     // (16), load factor (0.75) and concurrencyLevel (16) ,see
