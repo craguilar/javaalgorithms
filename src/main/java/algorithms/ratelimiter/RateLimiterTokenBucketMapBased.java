@@ -65,8 +65,4 @@ public class RateLimiterTokenBucketMapBased extends RateLimiter {
     }
   }
 
-  private String getOrderableId(Thread treadAqcuiringAToken) {
-
-    return String.format("%s-%d", treadAqcuiringAToken.getName().toLowerCase(), treadAqcuiringAToken.getId());
-  }
 }

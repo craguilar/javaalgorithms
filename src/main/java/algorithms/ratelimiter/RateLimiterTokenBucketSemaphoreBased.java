@@ -34,11 +34,6 @@ public class RateLimiterTokenBucketSemaphoreBased extends RateLimiter {
     return Optional.empty();
   }
 
-  private String getOrderableId(Thread treadAqcuiringAToken) {
-
-    return String.format("%s-%d", treadAqcuiringAToken.getName().toLowerCase(), treadAqcuiringAToken.getId());
-  }
-
   public boolean acquirePermission(int permits) {
     try {
       boolean success = semaphore.tryAcquire(permits, this.limitForPeriod.toMillis(), TimeUnit.MILLISECONDS);
@@ -47,6 +42,15 @@ public class RateLimiterTokenBucketSemaphoreBased extends RateLimiter {
       Thread.currentThread().interrupt();
       return false;
     }
+  }
+
+  /**
+   * This method , releases permits based on the current capacity that has been
+   * allocated
+   */
+  private void cleanExpiredTokens() {
+    int permissionsToRelease = this.capacity - semaphore.availablePermits();
+    semaphore.release(permissionsToRelease);
   }
 
   private ScheduledExecutorService getSingleThreadedScheduler() {
@@ -68,12 +72,4 @@ public class RateLimiterTokenBucketSemaphoreBased extends RateLimiter {
         this.limitForPeriod.toMillis(), TimeUnit.MILLISECONDS);
   }
 
-  /**
-   * This method , releases permits based on the current capacity that has been
-   * allocated
-   */
-  private void cleanExpiredTokens() {
-    int permissionsToRelease = this.capacity - semaphore.availablePermits();
-    semaphore.release(permissionsToRelease);
-  }
 }

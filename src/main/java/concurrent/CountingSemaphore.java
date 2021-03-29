@@ -15,9 +15,8 @@ public class CountingSemaphore {
     while (usedPermits == maxCount) {
       wait();
     }
-
-    notify();
     usedPermits++;
+    notify();
   }
 
   public synchronized void release() throws InterruptedException {

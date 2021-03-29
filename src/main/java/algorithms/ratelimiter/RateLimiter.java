@@ -15,4 +15,9 @@ public abstract class RateLimiter {
   protected Duration limitForPeriod;
 
   abstract Optional<String> getToken(Thread treadAqcuiringAToken);
+
+  protected String getOrderableId(Thread treadAqcuiringAToken) {
+
+    return String.format("%s-%d", treadAqcuiringAToken.getName().toLowerCase(), treadAqcuiringAToken.getId());
+  }
 }
