@@ -1,10 +1,10 @@
 package algorithms.backtracking;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
-
-import algorithms.backtracking.Parentheses;
 
 import java.util.List;
 
@@ -28,4 +28,25 @@ public class ParenthesesTest {
     List<String> result = Parentheses.generateParenthesis(2);
     assertEquals(2, result.size());
   }
+
+  @Test
+  public void validParentheses() {
+    Parentheses obj = new Parentheses();
+    assertTrue(obj.isValid("()"));
+    assertFalse(obj.isValid(")()())"));
+    assertTrue(obj.isValid("((()))()()"));
+    assertTrue(obj.isValid("((((()())()()))()(()))"));
+    assertTrue(obj.isValid("(a+b)-c"));
+  }
+
+  @Test
+  public void longestValidParenthesesTestCorrectness() {
+    Parentheses obj = new Parentheses();
+    assertEquals(2, obj.longestValidParentheses("()"));
+    assertEquals(4, obj.longestValidParentheses(")()())"));
+    assertEquals(10, obj.longestValidParentheses("((()))()()"));
+    assertEquals(22, obj.longestValidParentheses("((((()())()()))()(()))"));
+
+  }
+
 }

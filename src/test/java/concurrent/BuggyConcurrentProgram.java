@@ -4,11 +4,13 @@ import static org.junit.Assert.assertEquals;
 
 import java.lang.ref.WeakReference;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 public class BuggyConcurrentProgram {
 
   @Test(expected = AssertionError.class)
+  @Ignore
   public void testCorrectnessWithThreads() throws InterruptedException {
 
     // The higher the iterations the most probable we will always hit an error

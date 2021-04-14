@@ -112,10 +112,8 @@ public class MyStringBuffer {
 
   /**
    * 
-   * @param s
-   *          String to invert
-   * @param n
-   *          Index that should be initialized on 0
+   * @param s String to invert
+   * @param n Index that should be initialized on 0
    * @return
    */
   public static String reverseString(char[] s, int n) {
@@ -132,9 +130,9 @@ public class MyStringBuffer {
 
   /**
    * Alice decides on an encryption scheme involving 2 large strings where
-   * encryption is dependent on the minimum number of character deletions
-   * required to make the two strings anagrams. She need your help in finding
-   * out this number.
+   * encryption is dependent on the minimum number of character deletions required
+   * to make the two strings anagrams. She need your help in finding out this
+   * number.
    * 
    * Given two strings (they can be of same or different length) help her in
    * finding out the minimum number of character deletions required to make two
@@ -201,12 +199,15 @@ public class MyStringBuffer {
     // palindrome
     for (int i = 0; i < n - 1; i++) {
       String p1 = expandAroundCenter(s, i, i);
-      if (p1.length() > longest.length())
+      if (p1.length() > longest.length()) {
         longest = p1;
+      }
 
       String p2 = expandAroundCenter(s, i, i + 1);
-      if (p2.length() > longest.length())
+      if (p2.length() > longest.length()) {
         longest = p2;
+      }
+
     }
     return longest;
   }
