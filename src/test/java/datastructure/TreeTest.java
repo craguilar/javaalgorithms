@@ -1,7 +1,6 @@
 package datastructure;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
@@ -16,6 +15,10 @@ public class TreeTest {
     underTest.setRoot(getValidBinaryTree());
     String actual = underTest.preorderTraversal();
     assertEquals("1,2,3,4,5", actual);
+
+    underTest = new Tree(getSmallValidBinaryTree());
+    actual = underTest.preorderTraversal();
+    assertEquals("1,2,3", actual);
   }
 
   @Test
@@ -24,6 +27,10 @@ public class TreeTest {
     underTest.setRoot(getValidBinaryTree());
     String actual = underTest.inorderTransversal();
     assertEquals("2,1,4,3,5", actual);
+
+    underTest = new Tree(getSmallValidBinaryTree());
+    actual = underTest.inorderTransversal();
+    assertEquals("2,1,3", actual);
   }
 
   @Test
@@ -31,6 +38,10 @@ public class TreeTest {
     Tree underTest = new Tree(getValidBinaryTree());
     String actual = underTest.postorderTrasversal();
     assertEquals("2,4,5,3,1", actual);
+
+    underTest = new Tree(getSmallValidBinaryTree());
+    actual = underTest.postorderTrasversal();
+    assertEquals("2,3,1", actual);
   }
 
   @Test
@@ -46,6 +57,15 @@ public class TreeTest {
     String deserializeTreeStr = Tree.serialize(root);
     assertEquals(treeStr, deserializeTreeStr);
 
+  }
+
+  private BinaryTreeNode getSmallValidBinaryTree() {
+    BinaryTreeNode root = new BinaryTreeNode(1);
+    BinaryTreeNode node2 = new BinaryTreeNode(2);
+    BinaryTreeNode node3 = new BinaryTreeNode(3);
+    root.setLeft(node2);
+    root.setRight(node3);
+    return root;
   }
 
   private BinaryTreeNode getValidBinaryTree() {

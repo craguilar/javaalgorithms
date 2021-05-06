@@ -48,6 +48,23 @@ public class NumberAlgorithms {
     return sum;
   }
 
+  public static long fibo(int n) {
+    if (n == 0) {
+      return 0;
+    }
+    if (n == 1) {
+      return 1;
+    }
+    long prev = 0;
+    long current = 1;
+    for (int i = 1; i < n; i++) {
+      long temp = current;
+      current = current + prev;
+      prev = temp;
+    }
+    return current;
+  }
+
   /**
    * Larget prime factor . The prime factors of 13195 are 5, 7, 13 and 29.
    * 
@@ -60,7 +77,7 @@ public class NumberAlgorithms {
         if (number % PrimeConstants.UPTO100_PRIME_FACTORS[i] == 0) {
           largestPrimeFactor = PrimeConstants.UPTO100_PRIME_FACTORS[i];
           number = number / largestPrimeFactor;
-          
+
           break;
         }
       }
@@ -74,6 +91,5 @@ public class NumberAlgorithms {
     }
     return largestPrimeFactor;
   }
-
 
 }
