@@ -44,6 +44,25 @@ public class Array {
     return true;
   }
 
+  public static int binarySearchLessThanTarget(int[] nums, int begin, int end, int target) {
+    int middle = (end - begin) / 2 + begin;
+    int potential = -1;
+    while (begin <= end) {
+      // System.out.println("Middle "+middle+" "+nums[middle]);
+      if (nums[middle] == target) {
+        return target;
+      } else if (nums[middle] < target) {
+        potential = nums[middle];
+        begin = middle + 1;
+      } else if (nums[middle] > target) {
+        end = middle - 1;
+      }
+      middle = (end - begin) / 2 + begin;
+    }
+    // System.out.println("Middle "+middle+" "+nums[middle]);
+    return potential;
+  }
+
   public int binarySearch(int data) {
     // IMPORTANT*************************
     // the array need to be sorted...
