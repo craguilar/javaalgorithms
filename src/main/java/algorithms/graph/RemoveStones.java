@@ -20,6 +20,12 @@ public class RemoveStones {
 
   int max;
 
+  /**
+   * 
+   * @param stones
+   *          as a series of coordinates.
+   * @return the largest possible number of moves we can make?
+   */
   public int removeStones(int[][] stones) {
     max = 0;
     Map<String, List<String>> graph = createGraph(stones);
@@ -44,10 +50,16 @@ public class RemoveStones {
         max++;
         dfs(graph, stone, visited);
       }
-
     }
   }
 
+  /**
+   * This pre processing just makes the problem easier to solve , perhaps is not
+   * even needed.
+   * 
+   * @param stones
+   * @return
+   */
   private Map<String, List<String>> createGraph(int[][] stones) {
     Map<String, List<String>> graph = new HashMap<>();
     for (int i = 0; i < stones.length; i++) {
