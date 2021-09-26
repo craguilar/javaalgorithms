@@ -16,6 +16,40 @@ import org.apache.commons.lang3.tuple.Pair;
 public class StringAlgorithms {
 
   /**
+   * 
+   * @param str
+   * @param pairs
+   * @return
+   */
+  public static String swapLexOrder(String str, int[][] pairs) {
+    Set<String> visited = new HashSet<>();
+    Queue<String> toVisit = new LinkedList<>();
+    String last = str;
+    toVisit.add(str);
+    while (!toVisit.isEmpty()) {
+      String current = toVisit.poll();
+      if (visited.contains(current)) {
+        continue;
+      }
+      visited.add(current);
+      for (int[] pair : pairs) {
+        String swaped = swap(current, pair[0], pair[1]);
+        toVisit.add(swaped);
+        last = swaped.compareTo(last) >= 0 ? swaped : last;
+      }
+    }
+    return last;
+  }
+
+  private static String swap(String str, int a, int b) {
+    char[] charArray = str.toCharArray();
+    char c = charArray[a - 1];
+    charArray[a - 1] = charArray[b - 1];
+    charArray[b - 1] = c;
+    return new String(charArray);
+  }
+
+  /**
    * Given two words (beginWord and endWord), and a dictionary's word list, find
    * the length of shortest transformation sequence from beginWord to endWord,
    * such that:
@@ -25,12 +59,12 @@ public class StringAlgorithms {
    * <li>in the word list. Note that beginWord is not a transformed word.</li>
    * <ul>
    * 
-   * @param beginWord 
+   * @param beginWord
    * @param endWord
    * @param wordList
    * @return length of the shortest path.
    */
-  public static   int ladderLength(String beginWord, String endWord, List<String> wordList) {
+  public static int ladderLength(String beginWord, String endWord, List<String> wordList) {
     List<String> wordListFinal = new ArrayList<>(wordList);
     Map<String, Set<String>> graph = createGraph(beginWord, endWord, wordListFinal);
     return bfs(graph, beginWord, endWord);

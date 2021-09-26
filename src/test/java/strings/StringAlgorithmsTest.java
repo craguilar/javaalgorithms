@@ -9,6 +9,11 @@ import org.junit.Test;
 public class StringAlgorithmsTest {
 
   @Test
+  public void swapLexOrderTestCorrectness() {
+    assertEquals("dbca", StringAlgorithms.swapLexOrder("abdc", new int[][] { { 1, 4 }, { 3, 4 } }));
+  }
+
+  @Test
   public void ladderLengthTest() {
     int length = StringAlgorithms.ladderLength("hit", "cog", Arrays.asList("hot", "dot", "dog", "lot", "log", "cog"));
     assertEquals(5, length);
