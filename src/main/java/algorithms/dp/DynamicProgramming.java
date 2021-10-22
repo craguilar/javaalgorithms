@@ -115,4 +115,42 @@ public class DynamicProgramming {
     return count[rem - 1];
   }
 
+  /**
+   * Given
+   * 
+   * @param nums
+   *          an integer array nums
+   * @param k
+   *          an integer k
+   * @return true if nums has a continuous subarray of size at least two whose
+   *         elements sum up to a multiple of k, or false otherwise.
+   */
+  public boolean checkSubarraySum(int[] nums, int k) {
+    HashMap<Integer, Integer> map = new HashMap<>();
+    int curSum = 0;
+    map.put(0, 0);
+    // Put the base reminder in the map , which is 0 at a position 0 - an
+    // special condition which will save us some work
+    for (int i = 0; i < nums.length; i++) {
+      // Cumulative sum
+      curSum += nums[i];
+      // Get the reminder
+      int rem = curSum % k;
+      if (map.getOrDefault(rem, i) <= i - 1) {
+        /*
+         * If you happen to find the reminder in the map then you have found a
+         * subarray of size at least two whose elements sum up to a multiple of
+         * k. For example , nums= [1,2,1] and k=3 On i=0 , map ({0,0},{1,1},)
+         * curSum = 1 On i=1 , map ({0,0},{1,1},) curSum = 3 ... and You found
+         * your array :
+         */
+        return true;
+      }
+      // Add the reminder as a Key specifiying its position +1 given that
+      // position 0 is used by 0 :/
+      map.putIfAbsent(rem, i + 1);
+    }
+    return false;
+  }
+
 }

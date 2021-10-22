@@ -35,7 +35,7 @@ public class Problems {
       return result;
     }
     recurse(digits, "", 0, result);
-   
+
     return result;
   }
 
@@ -49,4 +49,5 @@ public class Problems {
       recurse(digits, current + digit, index + 1, result);
     }
   }
+
 }
