@@ -115,17 +115,17 @@ public class Tree {
   }
 
   public static BinaryTreeNode deserializeHelper(List<String> values) {
-    if("null".equalsIgnoreCase(values.get(0))){
+    if ("null".equalsIgnoreCase(values.get(0))) {
       values.remove(0);
       return null;
     }
     BinaryTreeNode node = new BinaryTreeNode(Integer.valueOf(values.get(0)));
     values.remove(0);
-    BinaryTreeNode left   = deserializeHelper(values);
-    BinaryTreeNode right  = deserializeHelper(values);
+    BinaryTreeNode left = deserializeHelper(values);
+    BinaryTreeNode right = deserializeHelper(values);
     node.setLeft(left);
     node.setRight(right);
-    return node ;
+    return node;
   }
 
   // -- Tree trasversal
@@ -246,4 +246,5 @@ public class Tree {
   public BinaryTreeNode getRoot() {
     return root;
   }
+
 }
