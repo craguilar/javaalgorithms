@@ -30,10 +30,10 @@ public class LinkedList {
 
   private void insertNode(DNode previous, int data) {
     DNode temp = new DNode(data, null);
-    DNode aux = previous.getRight();
-    temp.setRight(aux);
-    previous.setRight(temp);
-    if (temp.getRight() == null)
+    DNode aux = previous.getNext();
+    temp.setNext(aux);
+    previous.setNext(temp);
+    if (temp.getNext() == null)
       T = temp;
   }
 
@@ -57,25 +57,25 @@ public class LinkedList {
       current = H;
       H = T = null;
     } else if (anterior != null) {
-      current = anterior.getRight();
-      anterior.setRight(current.getRight());
+      current = anterior.getNext();
+      anterior.setNext(current.getNext());
     } else {
       current = H;
-      H = H.getRight();
+      H = H.getNext();
     }
     return current;
   }
 
   private DNode find(int data, DNode q) {
     while (q != null && data != q.getValue())
-      q = q.getRight();
+      q = q.getNext();
     return q;
   }
 
   public DNode findPrevious(int key) {
     exist = false;
     DNode current, anterior = null;
-    for (current = H; current != null; current = current.getRight()) {
+    for (current = H; current != null; current = current.getNext()) {
       if (exist = current.getValue() == key)
         return anterior;
       else
@@ -92,12 +92,6 @@ public class LinkedList {
     return exist;
   }
 
-  private DNode swap(DNode i, DNode indice) {
-    int aux = i.getValue();
-    i.setValue(indice.getValue());
-    indice.setValue(aux);
-    return i.getRight();
-  }
   /*
    * 
    * Definition for singly-linked list. class ListNode { public int val; public

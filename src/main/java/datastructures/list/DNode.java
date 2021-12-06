@@ -2,19 +2,19 @@ package datastructures.list;
 
 public class DNode {
   private int value;
-  private DNode left;
-  private DNode right;
+  private DNode previous;
+  private DNode next;
 
-  public DNode(int value, DNode left, DNode right) {
+  public DNode(int value, DNode previous, DNode next) {
     this.value = value;
-    this.left = left;
-    this.right = right;
+    this.previous = previous;
+    this.next = next;
   }
 
-  public DNode(int value, DNode right) {
+  public DNode(int value, DNode next) {
     this.value = value;
-    this.left = null;
-    this.right = right;
+    this.previous = null;
+    this.next = next;
   }
 
   public void setValue(int value) {
@@ -25,19 +25,19 @@ public class DNode {
     return value;
   }
 
-  public void setLeft(DNode left) {
-    this.left = left;
+  public void setPrevious(DNode previous) {
+    this.previous = previous;
   }
 
-  public DNode getLeft() {
-    return left;
+  public DNode getPrevious() {
+    return previous;
   }
 
-  public void setRight(DNode right) {
-    this.right = right;
+  public void setNext(DNode right) {
+    this.next = right;
   }
 
-  public DNode getRight() {
-    return right;
+  public DNode getNext() {
+    return next;
   }
 }

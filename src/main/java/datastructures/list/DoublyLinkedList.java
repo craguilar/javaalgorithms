@@ -2,44 +2,47 @@ package datastructures.list;
 
 public class DoublyLinkedList {
 
-  private DNode H;
-  private DNode T;
+  private DNode head;
+  private DNode tail;
 
   public DoublyLinkedList() {
-    H = T = null;
+    head = tail = null;
   }
 
-  private void insertNode(DNode find, int dato) {
-    DNode temp = new DNode(dato, null, null);
-    temp.setLeft(find);
-    temp.setRight(find.getRight());
-    find.getRight().setLeft(temp);
-    find.setRight(temp);
-    if (temp.getRight() == null)
-      T = temp;
+  private DNode insertNode(DNode find, int value) {
+    DNode temp = new DNode(value, null, null);
+    temp.setPrevious(find);
+    temp.setNext(find.getNext());
+    find.getNext().setPrevious(temp);
+    find.setNext(temp);
+    if (temp.getNext() == null)
+      tail = temp;
+    return temp;
   }
 
-  public void insertBegining(int dato) {
-    DNode q = new DNode(dato, null, H);
-    if (H == null)
-      T = q;
+  public DNode insertBegining(int value) {
+    DNode q = new DNode(value, null, head);
+    if (head == null)
+      tail = q;
     else
-      H.setLeft(q);
-    H = q;
+      head.setPrevious(q);
+    head = q;
+    return q;
   }
 
-  public void insertEnd(int dato) {
-    DNode q = new DNode(dato, T, null);
-    if (H == null)
-      H = q;
+  public DNode insertEnd(int value) {
+    DNode q = new DNode(value, tail, null);
+    if (head == null)
+      head = q;
     else
-      T.setRight(q);
-    T = q;
+      tail.setNext(q);
+    tail = q;
+    return q;
   }
 
   public void insertAfter(DNode insert, int dato) {
     if (insert != null) {
-      if (insert == T)
+      if (insert == tail)
         insertEnd(dato);
       else
         insertNode(insert, dato);
@@ -48,41 +51,50 @@ public class DoublyLinkedList {
 
   public void insertBefore(DNode insert, int dato) {
     if (insert != null) {
-      if (insert == H)
+      if (insert == head)
         insertBegining(dato);
       else
-        insertNode(insert.getLeft(), dato);
+        insertNode(insert.getPrevious(), dato);
     }
   }
 
   public DNode delete(int data) {
     DNode delete = find(data);
+
+    return remove(delete);
+  }
+
+  public DNode remove(DNode delete) {
     DNode aux = delete;
     if (delete != null) {
-      if (H == T)
-        H = T = null;
-      else if (delete == H) {
-        delete.getRight().setLeft(null);
-        H = delete.getRight();
-      } else if (delete == T) {
-        delete.getLeft().setRight(null);
-        T = delete.getLeft();
+      if (head == tail)
+        head = tail = null;
+      else if (delete == head) {
+        delete.getNext().setPrevious(null);
+        head = delete.getNext();
+      } else if (delete == tail) {
+        delete.getPrevious().setNext(null);
+        tail = delete.getPrevious();
       } else {
-        delete.getLeft().setRight(delete.getRight());
-        delete.getRight().setLeft(delete.getLeft());
+        delete.getPrevious().setNext(delete.getNext());
+        delete.getNext().setPrevious(delete.getPrevious());
       }
     }
     return aux;
   }
 
   public DNode find(int data) {
-    DNode q = H;
+    DNode q = head;
     while (q != null && data != q.getValue())
-      q = q.getRight();
+      q = q.getNext();
     return q;
   }
 
-  public DNode GetInicio() {
-    return H;
+  public DNode getHead() {
+    return head;
+  }
+
+  public DNode getTail() {
+    return tail;
   }
 }
