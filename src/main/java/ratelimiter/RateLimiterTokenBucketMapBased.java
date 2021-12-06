@@ -1,4 +1,4 @@
-package algorithms.ratelimiter;
+package ratelimiter;
 
 import java.time.Duration;
 import java.time.Instant;

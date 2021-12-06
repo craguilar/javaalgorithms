@@ -1,4 +1,4 @@
-package algorithms.ratelimiter;
+package ratelimiter;
 
 import static org.junit.Assert.assertTrue;
 
