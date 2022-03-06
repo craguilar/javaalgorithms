@@ -23,8 +23,7 @@ public class Tree {
   /**
    * Build the tree from a sorted array
    * 
-   * @param a
-   *          sorted array
+   * @param a sorted array
    */
   public Tree(int[] a) {
     root = sortedArraytoTree(a, 0, a.length - 1);
@@ -36,10 +35,10 @@ public class Tree {
   }
 
   /**
-   * Example , PRE ORDER=[F, B, A, D, C, E, G, I, H] and IN ORDER=[A, B, C, D,
-   * E, F, G, H, I]
+   * Example , PRE ORDER=[F, B, A, D, C, E, G, I, H] and IN ORDER=[A, B, C, D, E, F, G, H, I]
    */
-  private BinaryTreeNode createTreeFromPreInOrder(int[] preOrder, int[] inOrder, int left, int right) {
+  private BinaryTreeNode createTreeFromPreInOrder(int[] preOrder, int[] inOrder, int left,
+      int right) {
     int current = -1;
     BinaryTreeNode n;
     if (left > right)
@@ -71,10 +70,9 @@ public class Tree {
   }
 
   /**
-   * Implement a function to check if a binary tree is a binary search tree. A
-   * binary search tree imposes the condition that, for all nodes, the left
-   * children are less than or equal to the current node, which is less that all
-   * the right nodes.
+   * Implement a function to check if a binary tree is a binary search tree. A binary search tree
+   * imposes the condition that, for all nodes, the left children are less than or equal to the
+   * current node, which is less that all the right nodes.
    * 
    * @return
    */
@@ -88,7 +86,8 @@ public class Tree {
       return true;
     if (node.getValue() <= min || node.getValue() > max)
       return false;
-    if (!isBST(node.getLeft(), min, node.getValue()) || !isBST(node.getRight(), node.getValue(), max))
+    if (!isBST(node.getLeft(), min, node.getValue())
+        || !isBST(node.getRight(), node.getValue(), max))
       return false;
     return true;
   }
@@ -163,10 +162,9 @@ public class Tree {
   // -- Tree trasversal
   public String preorderTraversal() {
     /*
-     * root -> left -> right Display the data part of root element (or current
-     * element) Traverse the left subtree by recursively calling the pre-order
-     * function. Traverse the right subtree by recursively calling the pre-order
-     * function.
+     * root -> left -> right Display the data part of root element (or current element) Traverse the
+     * left subtree by recursively calling the pre-order function. Traverse the right subtree by
+     * recursively calling the pre-order function.
      */
     StringBuffer result = new StringBuffer();
     printTrasversal(root, "PRE", result);
@@ -175,10 +173,9 @@ public class Tree {
 
   public String inorderTransversal() {
     /*
-     * left ->root ->right Traverse the left subtree by recursively calling the
-     * in-order function. Display the data part of root element (or current
-     * element). Traverse the right subtree by recursively calling the in-order
-     * function.
+     * left ->root ->right Traverse the left subtree by recursively calling the in-order function.
+     * Display the data part of root element (or current element). Traverse the right subtree by
+     * recursively calling the in-order function.
      */
     StringBuffer result = new StringBuffer();
     printTrasversal(root, "IN", result);
