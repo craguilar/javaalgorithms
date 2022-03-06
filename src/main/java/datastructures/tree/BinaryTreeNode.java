@@ -1,9 +1,9 @@
 package datastructures.tree;
 
 public class BinaryTreeNode {
-  private Integer value;
-  private BinaryTreeNode left;
-  private BinaryTreeNode right;
+  protected Integer value;
+  protected BinaryTreeNode left;
+  protected BinaryTreeNode right;
 
   public BinaryTreeNode(Integer value) {
     super();

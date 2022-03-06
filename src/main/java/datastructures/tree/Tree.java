@@ -128,6 +128,38 @@ public class Tree {
     return node;
   }
 
+  public static List<List<Integer>> zigzagLevelOrder(BinaryTreeNode root) {
+    List<List<Integer>> result = new ArrayList<>();
+    LinkedList<BinaryTreeNode> current = new LinkedList<>();
+    current.add(root);
+    boolean leftToRight = true;
+    while (!current.isEmpty()) {
+      LinkedList<BinaryTreeNode> nextLevel = new LinkedList<>();
+      result.add(new ArrayList<>());
+      while (!current.isEmpty()) {
+        BinaryTreeNode node = leftToRight ? current.removeFirst() : current.removeLast();
+        result.get(result.size() - 1).add(node.value);
+        if (leftToRight) {
+          nextLevel.add(node.left);
+          nextLevel.add(node.right);
+        } else {
+          nextLevel.add(node.right);
+          nextLevel.add(node.left);
+        }
+      }
+      while (!nextLevel.isEmpty()) {
+        BinaryTreeNode node = leftToRight ? nextLevel.removeFirst() : nextLevel.removeLast();
+        if (node == null) {
+          continue;
+        }
+        current.add(node);
+      }
+      leftToRight = !leftToRight;
+
+    }
+    return result;
+  }
+
   // -- Tree trasversal
   public String preorderTraversal() {
     /*
