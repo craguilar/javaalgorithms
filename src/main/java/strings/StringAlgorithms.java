@@ -247,4 +247,21 @@ public class StringAlgorithms {
 
   }
 
+  public static String compressString(String s) {
+
+    StringBuffer sb = new StringBuffer();
+    int counter = 1;
+    for (int i = 0; i < s.length(); i++) {
+      if (i < s.length() - 1 && s.charAt(i) == s.charAt(i + 1)) {
+        counter++;
+      } else {
+        String count = counter == 1 ? "" : counter + "";
+        sb.append(s.charAt(i) + "" + count);
+        counter = 1;
+      }
+    }
+    return sb.toString();
+
+  }
+
 }

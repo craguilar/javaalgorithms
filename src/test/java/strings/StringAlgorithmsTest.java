@@ -44,4 +44,14 @@ public class StringAlgorithmsTest {
     assertEquals(true, StringAlgorithms.oneEditApart("cat", "cut"));
     assertEquals(true, StringAlgorithms.oneEditApart("geaks", "geeks"));
   }
+
+  @Test
+  public void compressStringTest() {
+    assertEquals("a3", StringAlgorithms.compressString("aaa"));
+    assertEquals("a3bc", StringAlgorithms.compressString("aaabc"));
+    assertEquals("a3bc2", StringAlgorithms.compressString("aaabcc"));
+    assertEquals("a3bc2a3bc2a3bc2a3bc2a3bc2a3bc2a",
+        StringAlgorithms.compressString("aaabccaaabccaaabccaaabccaaabccaaabcca"));
+
+  }
 }
