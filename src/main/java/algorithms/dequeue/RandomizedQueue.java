@@ -1,7 +1,7 @@
 package algorithms.dequeue;
 
 import java.util.Iterator;
-
+import java.lang.SuppressWarnings;
 import edu.princeton.cs.algs4.StdRandom;
 
 public class RandomizedQueue<Item> implements Iterable<Item> {
@@ -9,6 +9,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
   private Item[] items;
   private int count;
 
+  @SuppressWarnings("unchecked")
   public RandomizedQueue() {
     // construct an empty randomized queue
     items = (Item[]) new Object[1];
@@ -62,6 +63,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     return elt;
   }
 
+  @SuppressWarnings("unchecked")
   private void resize(int capacity) {
     Item[] copy = (Item[]) new Object[capacity];
     for (int i = 0; i < count; i++) {
