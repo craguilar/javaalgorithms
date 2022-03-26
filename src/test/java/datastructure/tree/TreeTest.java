@@ -1,4 +1,4 @@
-package datastructure;
+package datastructure.tree;
 
 import static org.junit.Assert.assertEquals;
 
@@ -65,9 +65,8 @@ public class TreeTest {
   @Test
   public void zigzagLevelOrderTest() {
     List<List<Integer>> result = Tree.zigzagLevelOrder(getValidZigZagTree());
-    assertEquals(
-        Arrays.asList(Arrays.asList(3), Arrays.asList(20, 9), Arrays.asList(1, 2, 15, 7), Arrays.asList(31, 30, 10, 8)),
-        result);
+    assertEquals(Arrays.asList(Arrays.asList(3), Arrays.asList(20, 9), Arrays.asList(1, 2, 15, 7),
+        Arrays.asList(31, 30, 10, 8)), result);
   }
 
   private BinaryTreeNode getSmallValidBinaryTree() {

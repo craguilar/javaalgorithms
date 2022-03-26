@@ -13,7 +13,7 @@ public class NumberAlgorithmsTest {
   public void findSumOfMultiplesOfNumbersTest() {
 
     Instant start = Instant.now();
-    int sum = NumberAlgorithms.findSumOfMultiplesOfNumbers(new int[] { 3, 5 }, 10);
+    int sum = NumberAlgorithms.findSumOfMultiplesOfNumbers(new int[] {3, 5}, 10);
     assertEquals(23, sum);
     Instant finish = Instant.now();
     long timeElapsed = Duration.between(start, finish).toMillis();
@@ -43,5 +43,16 @@ public class NumberAlgorithmsTest {
     assertEquals(259695496911122585L, NumberAlgorithms.fibo(85));
     assertEquals(2880067194370816120L, NumberAlgorithms.fibo(90));
     assertEquals(7540113804746346429L, NumberAlgorithms.fibo(92));
+  }
+
+  @Test
+  public void findIthPrime() {
+    assertEquals(2, NumberAlgorithms.findIthPrime(1));
+    assertEquals(3, NumberAlgorithms.findIthPrime(2));
+    assertEquals(5, NumberAlgorithms.findIthPrime(3));
+    assertEquals(7, NumberAlgorithms.findIthPrime(4));
+    assertEquals(11, NumberAlgorithms.findIthPrime(5));
+    assertEquals(13, NumberAlgorithms.findIthPrime(6));
+    assertEquals(104743, NumberAlgorithms.findIthPrime(10001));
   }
 }
