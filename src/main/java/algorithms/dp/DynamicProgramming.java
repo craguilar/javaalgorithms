@@ -4,9 +4,6 @@ import java.util.HashMap;
 
 public class DynamicProgramming {
 
-  private int minChange;
-  private HashMap<Integer, Integer> cache = new HashMap<>();
-
   public static class Item {
     private final int weight;
     private final int value;
@@ -26,66 +23,23 @@ public class DynamicProgramming {
       return 0;
     }
     if (maxWeight - items[currentIndex].weight < 0) {
-      return knapsackHelper(items, maxWeight, currentIndex + 1);
+      return knapsackHelper(items, maxWeight, currentIndex + 1); // Skip
     }
     // Find the maximum of including and not
     // including the current item
-    return Math.max(
-        knapsackHelper(items, maxWeight - items[currentIndex].weight, currentIndex + 1) + items[currentIndex].value,
-        knapsackHelper(items, maxWeight, currentIndex + 1));
+    return Math.max(knapsackHelper(items, maxWeight - items[currentIndex].weight, currentIndex + 1)
+        + items[currentIndex].value, knapsackHelper(items, maxWeight, currentIndex + 1));
 
   }
 
   /**
-   * DO NOT USE :) ! Just for testing purpose , this is not optinal nor it will
-   * ever be + I hate to share class variables :) . Given an integer
-   * representing a given amount of change, write a function to compute the
-   * total number of coins required to make that amount of change. You can
-   * assume that there is always a 1¢ coin. eg. (assuming American coins: 1, 5,
-   * 10, and 25 cents) makeChange(1)
-   * 
-   * @param n
-   * @return
-   */
-  public int makeChange(int n) {
-    minChange = Integer.MAX_VALUE;
-    cache.clear();
-    makeChangeHelper(n, 0, 0);
-    return minChange;
-  }
-
-  private void makeChangeHelper(int n, int currentSum, int numOfCoins) {
-    if (cache.get(currentSum) != null) {
-      minChange = Math.min(cache.get(currentSum), numOfCoins);
-      return;
-    }
-    if (currentSum > n) {
-      return;
-    }
-    if (currentSum == n) {
-      minChange = Math.min(numOfCoins, minChange);
-      cache.put(currentSum, minChange);
-      return;
-    }
-    // System.out.println("Remains for " + (n - currentSum) + " numOfCoins " +
-    // numOfCoins);
-    makeChangeHelper(n, currentSum + 1, numOfCoins + 1);
-    makeChangeHelper(n, currentSum + 5, numOfCoins + 1);
-    makeChangeHelper(n, currentSum + 10, numOfCoins + 1);
-    makeChangeHelper(n, currentSum + 25, numOfCoins + 1);
-
-  }
-
-  /**
-   * You are given coins of different denominations and a total amount of money
-   * amount. Write a function to compute the fewest number of coins that you
-   * need to make up that amount. If that amount of money cannot be made up by
-   * any combination of the coins, return -1.
+   * You are given coins of different denominations and a total amount of money amount. Write a
+   * function to compute the fewest number of coins that you need to make up that amount. If that
+   * amount of money cannot be made up by any combination of the coins, return -1.
    * 
    * @param coins
    * @param amount
-   * @return If that amount of money cannot be made up by any combination of the
-   *         coins, return -1.
+   * @return If that amount of money cannot be made up by any combination of the coins, return -1.
    */
   public static int coinChangeTopDown(int[] coins, int amount) {
     if (amount < 1) {
@@ -118,12 +72,10 @@ public class DynamicProgramming {
   /**
    * Given
    * 
-   * @param nums
-   *          an integer array nums
-   * @param k
-   *          an integer k
-   * @return true if nums has a continuous subarray of size at least two whose
-   *         elements sum up to a multiple of k, or false otherwise.
+   * @param nums an integer array nums
+   * @param k an integer k
+   * @return true if nums has a continuous subarray of size at least two whose elements sum up to a
+   *         multiple of k, or false otherwise.
    */
   public boolean checkSubarraySum(int[] nums, int k) {
     HashMap<Integer, Integer> map = new HashMap<>();
@@ -138,11 +90,10 @@ public class DynamicProgramming {
       int rem = curSum % k;
       if (map.getOrDefault(rem, i) <= i - 1) {
         /*
-         * If you happen to find the reminder in the map then you have found a
-         * subarray of size at least two whose elements sum up to a multiple of
-         * k. For example , nums= [1,2,1] and k=3 On i=0 , map ({0,0},{1,1},)
-         * curSum = 1 On i=1 , map ({0,0},{1,1},) curSum = 3 ... and You found
-         * your array :
+         * If you happen to find the reminder in the map then you have found a subarray of size at
+         * least two whose elements sum up to a multiple of k. For example , nums= [1,2,1] and k=3
+         * On i=0 , map ({0,0},{1,1},) curSum = 1 On i=1 , map ({0,0},{1,1},) curSum = 3 ... and You
+         * found your array :
          */
         return true;
       }
