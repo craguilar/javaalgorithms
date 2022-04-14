@@ -57,7 +57,7 @@ public class BuggyConcurrentProgram {
    */
   public static void gc() {
     Object obj = new Object();
-    WeakReference weakObjectRef = new WeakReference<Object>(obj);
+    WeakReference<Object> weakObjectRef = new WeakReference<Object>(obj);
     obj = null;
     while (weakObjectRef.get() != null) {
       System.gc();

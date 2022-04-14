@@ -66,11 +66,6 @@ public class LinkedList {
     return current;
   }
 
-  private DNode find(int data, DNode q) {
-    while (q != null && data != q.getValue())
-      q = q.getNext();
-    return q;
-  }
 
   public DNode findPrevious(int key) {
     exist = false;
@@ -94,18 +89,17 @@ public class LinkedList {
 
   /*
    * 
-   * Definition for singly-linked list. class ListNode { public int val; public
-   * ListNode next; ListNode(int x) { val = x; next = null; } }
+   * Definition for singly-linked list. class ListNode { public int val; public ListNode next;
+   * ListNode(int x) { val = x; next = null; } }
    * 
-   * public class Solution { public ListNode reverseBetween(ListNode A, int m,
-   * int n) {
+   * public class Solution { public ListNode reverseBetween(ListNode A, int m, int n) {
    * 
    * int i; ListNode node = A; ListNode prev = null; m--; n--;
    * 
    * for (i = 0; i < m; i++) { prev = node; node = node.next; }
    * 
-   * if (prev != null) prev.next = reverseList(node, n - m + 1); else A =
-   * reverseList(node, n - m + 1);
+   * if (prev != null) prev.next = reverseList(node, n - m + 1); else A = reverseList(node, n - m +
+   * 1);
    * 
    * return A; }
    * 
