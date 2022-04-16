@@ -15,3 +15,11 @@ gradle clean build
 ```bash
 gradle clean test
 ```
+
+### Contributing
+
+Format
+
+"java.format.settings.url": "./config/build/eclipse-formatter.xml",
+
+<https://www.infoq.com/news/2022/03/gradle-7-4/>
