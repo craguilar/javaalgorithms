@@ -1,7 +1,6 @@
 package prj.caruizag.algorithms.dp;
 
 import java.util.Arrays;
-import javax.naming.directory.InvalidAttributeValueException;
 
 /**
  * Problem Statement You're a delivery person, and you want to try planning out your schedule. You

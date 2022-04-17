@@ -1,4 +1,4 @@
-package percolation.test;
+package prj.caruizag.test;
 
 import edu.princeton.cs.algs4.StdDraw;
 import edu.princeton.cs.algs4.StdOut;
