@@ -15,6 +15,35 @@ import org.apache.commons.lang3.tuple.Pair;
 
 public class StringAlgorithms {
 
+  public static String writeStringSinusoidally(String s) {
+
+    StringBuffer up = new StringBuffer();
+    StringBuffer center = new StringBuffer();
+    StringBuffer down = new StringBuffer();
+    boolean goUp = true;
+    for (int i = 0; i < s.length(); i++) {
+      char c = s.charAt(i);
+      // Center
+      if (i % 2 == 0) {
+        up.append(' ');
+        center.append(c);
+        down.append(' ');
+      } else if (goUp) {
+        up.append(c);
+        center.append(' ');
+        down.append(' ');
+        goUp = !goUp;
+      } else {
+        up.append(' ');
+        center.append(' ');
+
+        down.append(c);
+        goUp = !goUp;
+      }
+    }
+    return String.join("\n", up, center, down);
+  }
+
   /**
    * 
    * @param str
@@ -50,12 +79,10 @@ public class StringAlgorithms {
   }
 
   /**
-   * Given two words (beginWord and endWord), and a dictionary's word list, find
-   * the length of shortest transformation sequence from beginWord to endWord,
-   * such that:
+   * Given two words (beginWord and endWord), and a dictionary's word list, find the length of
+   * shortest transformation sequence from beginWord to endWord, such that:
    * <ul>
-   * <li>Only one letter can be changed at a time. Each transformed word must
-   * exist.</li>
+   * <li>Only one letter can be changed at a time. Each transformed word must exist.</li>
    * <li>in the word list. Note that beginWord is not a transformed word.</li>
    * <ul>
    * 
@@ -70,7 +97,8 @@ public class StringAlgorithms {
     return bfs(graph, beginWord, endWord);
   }
 
-  private static Map<String, Set<String>> createGraph(String beginWord, String endWord, List<String> wordList) {
+  private static Map<String, Set<String>> createGraph(String beginWord, String endWord,
+      List<String> wordList) {
     Map<String, Set<String>> graph = new HashMap<>();
     if (!wordList.contains(beginWord)) {
       wordList.add(0, beginWord);
@@ -142,12 +170,9 @@ public class StringAlgorithms {
   }
 
   /**
-   * Given a string, find the length of the longest substring without repeating
-   * characters.
+   * Given a string, find the length of the longest substring without repeating characters.
    * 
-   * @param s
-   *          where search of longest longest substring without repeating
-   *          characters will happen
+   * @param s where search of longest longest substring without repeating characters will happen
    * @return length of the longest substring.
    */
   public static int lengthOfLongestSubstring(final String s) {
@@ -202,7 +227,8 @@ public class StringAlgorithms {
     }
   }
 
-  public static String findLongestWordWhichIsASubsequence(final String target, final String[] dictionary) {
+  public static String findLongestWordWhichIsASubsequence(final String target,
+      final String[] dictionary) {
     final String longestSubsequence = null;
     Arrays.sort(dictionary, new StringComparatorSize());
     for (int i = 0; i < dictionary.length; i++) {
@@ -213,15 +239,13 @@ public class StringAlgorithms {
   }
 
   /**
-   * Given a string, return the sum of the numbers appearing in the string,
-   * ignoring all other characters. A number is a series of 1 or more digit
-   * chars in a row. (Note: Character.isDigit(char) tests if a char is one of
-   * the chars '0', '1', .. '9'. Integer.parseInt(string) converts a string to
-   * an int.)
+   * Given a string, return the sum of the numbers appearing in the string, ignoring all other
+   * characters. A number is a series of 1 or more digit chars in a row. (Note:
+   * Character.isDigit(char) tests if a char is one of the chars '0', '1', .. '9'.
+   * Integer.parseInt(string) converts a string to an int.)
    * 
    * 
-   * sumNumbers("abc123xyz") → 123 sumNumbers("aa11b33") → 44 sumNumbers("7 11")
-   * → 18
+   * sumNumbers("abc123xyz") → 123 sumNumbers("aa11b33") → 44 sumNumbers("7 11") → 18
    */
 
   public static boolean isSubsequence(final String target, final String word) {

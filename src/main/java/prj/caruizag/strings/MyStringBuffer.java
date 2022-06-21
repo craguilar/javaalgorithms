@@ -24,8 +24,8 @@ public class MyStringBuffer {
   }
 
   /**
-   * Implement an algorithm to determine if a string has all unique characters.
-   * What if you cannot use additional data structures?
+   * Implement an algorithm to determine if a string has all unique characters. What if you cannot
+   * use additional data structures?
    * 
    * @return
    */
@@ -90,9 +90,9 @@ public class MyStringBuffer {
   }
 
   /**
-   * Given a string of lowercase letters, determine the index of the character
-   * whose removal will make the string a palindrome. If the string is already a
-   * palindrome, then print . There will always be a valid solution.
+   * Given a string of lowercase letters, determine the index of the character whose removal will
+   * make the string a palindrome. If the string is already a palindrome, then print . There will
+   * always be a valid solution.
    * 
    * @return
    */
@@ -129,14 +129,13 @@ public class MyStringBuffer {
   }
 
   /**
-   * Alice decides on an encryption scheme involving 2 large strings where
-   * encryption is dependent on the minimum number of character deletions required
-   * to make the two strings anagrams. She need your help in finding out this
-   * number.
+   * Alice decides on an encryption scheme involving 2 large strings where encryption is dependent
+   * on the minimum number of character deletions required to make the two strings anagrams. She
+   * need your help in finding out this number.
    * 
-   * Given two strings (they can be of same or different length) help her in
-   * finding out the minimum number of character deletions required to make two
-   * strings anagrams Any characters can be deleted from any of the strings.
+   * Given two strings (they can be of same or different length) help her in finding out the minimum
+   * number of character deletions required to make two strings anagrams Any characters can be
+   * deleted from any of the strings.
    */
   public static int makeItAnagram(String aIn, String bIn) {
     int count = 0;
@@ -170,22 +169,6 @@ public class MyStringBuffer {
     return sum;
   }
 
-  /**
-   * @param s
-   * @param c1
-   * @param c2
-   * @return
-   */
-  private static String expandAroundCenter(String s, int c1, int c2) {
-    int l = c1;
-    int r = c2;
-    int n = s.length();
-    while (l >= 0 && r < n && s.charAt(l) == s.charAt(r)) {
-      l--;
-      r++;
-    }
-    return s.substring(l + 1, r);
-  }
 
   /**
    * @param s
@@ -193,8 +176,10 @@ public class MyStringBuffer {
    */
   public static String longestPalindrome(String s) {
     int n = s.length();
-    if (n == 0)
+    if (n == 0) {
       return "";
+    }
+
     String longest = s.substring(0, 1); // a single char itself is a
     // palindrome
     for (int i = 0; i < n - 1; i++) {
@@ -210,6 +195,23 @@ public class MyStringBuffer {
 
     }
     return longest;
+  }
+
+  /**
+   * @param s
+   * @param c1
+   * @param c2
+   * @return
+   */
+  private static String expandAroundCenter(String s, int c1, int c2) {
+    int l = c1;
+    int r = c2;
+    int n = s.length();
+    while (l >= 0 && r < n && s.charAt(l) == s.charAt(r)) {
+      l--;
+      r++;
+    }
+    return s.substring(l + 1, r);
   }
 
   /**

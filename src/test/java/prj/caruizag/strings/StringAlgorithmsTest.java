@@ -9,6 +9,14 @@ import org.junit.Test;
 public class StringAlgorithmsTest {
 
   @Test
+  public void writeStringSinusoidally() {
+    String result = StringAlgorithms.writeStringSinusoidally("Hello World");
+    System.out.println(result);
+    String expected = " e       l \nH l o W r d\n   l   o   ";
+    assertEquals(expected, result);
+  }
+
+  @Test
   public void swapLexOrderTestCorrectness() {
     assertEquals("dbca", StringAlgorithms.swapLexOrder("abdc", new int[][] {{1, 4}, {3, 4}}));
   }
