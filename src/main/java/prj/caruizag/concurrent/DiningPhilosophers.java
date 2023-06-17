@@ -3,65 +3,43 @@ package prj.caruizag.concurrent;
 import java.util.concurrent.Semaphore;
 
 /**
- * TODO: https://leetcode.com/problems/the-dining-philosophers/submissions/
+ * This is the leet code solution for
+ * https://leetcode.com/problems/the-dining-philosophers/submissions/ , please note the use of
+ * synchronized in wantsToEat, this is not how I will implement this problem at all, as ideally we
+ * could get rid of synchronized by adding an additional Semaphore with 4 permits to allow only 4
+ * Philosophers to hold forks at a time , else this could result in algorithmjavj with starvation.
  */
 class DiningPhilosophers {
 
-  // The table allow max 4 Philosophers
-  private Semaphore semaphore = new Semaphore(4);
-  /*
-   * The shared resources here are the forks, there are 5 forks -
-   */
-  private boolean[] forks; // True means it is in use
-  // Object used for mutual exclusion for critical regions
-  private Object lock;
+  private Semaphore[] forks = new Semaphore[5];
+
 
   public DiningPhilosophers() {
-    forks = new boolean[5];
-    lock = new Object();
+    for (int i = 0; i < forks.length; i++) {
+      forks[i] = new Semaphore(1);
+    }
   }
 
   // call the run() method of any runnable to execute its code
-  public void wantsToEat(int philosopher, Runnable pickLeftFork, Runnable pickRightFork,
-      Runnable eat, Runnable putLeftFork, Runnable putRightFork) throws InterruptedException {
-    semaphore.acquire(); // Philosopher entered the room.
-    int leftForkId = philosopher;
-    int rightForkId = philosopher != 4 ? philosopher + 1 : 0;
-    // Step 1. When I want to eat I need to make sure the forks are availble
-    int forksInUse = 0;
+  public synchronized void wantsToEat(int philosopher, Runnable pickLeftFork,
+      Runnable pickRightFork, Runnable eat, Runnable putLeftFork, Runnable putRightFork)
+      throws InterruptedException {
 
-    while (forksInUse < 2) {
-      synchronized (lock) {
-        while (forks[leftForkId] || forks[rightForkId]) {
-          lock.wait(); // Wait until there is a change.
-        }
-        // Begin Critical section
-        if (!forks[leftForkId]) {
-          forks[leftForkId] = true;
-          pickLeftFork.run();
-          forksInUse++;
-        }
-        if (!forks[rightForkId]) {
-          forks[rightForkId] = true;
-          pickRightFork.run();
-          forksInUse++;
-        }
-        // End of critical section
-        lock.notifyAll();
-      }
-    }
+    int left = philosopher;
+    int right = (philosopher + 4) % 5;
+    forks[left].acquire();
+    forks[right].acquire();
+    pickLeftFork.run();
+    pickRightFork.run();
 
-    // Step 2. If forks are available then I eat.
+    // Eat
     eat.run();
-    // Step 3. Finally I put bakc the forks.
-    synchronized (lock) {
-      putRightFork.run();
-      putLeftFork.run();
-      forks[rightForkId] = false;
-      forks[leftForkId] = false;
-      lock.notifyAll();
-    }
-    semaphore.release();
-  }
 
+    // Leave the table
+    forks[left].release();
+    forks[right].release();
+    putLeftFork.run();
+    putRightFork.run();
+
+  }
 }
