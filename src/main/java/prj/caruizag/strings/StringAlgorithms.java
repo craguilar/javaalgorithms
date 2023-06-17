@@ -15,6 +15,11 @@ import org.apache.commons.lang3.tuple.Pair;
 
 public class StringAlgorithms {
 
+  public static boolean patternSearch(String base, String pattern) {
+    // TODO :
+    throw new UnsupportedOperationException("Not implemented");
+  }
+
   public static String writeStringSinusoidally(String s) {
 
     StringBuffer up = new StringBuffer();

@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 /**
  * Problem of scheduling several competing activities that require exclusive access to a common
- * resource, with a goal of selecting a maximum-size set of mutually exclusive elements.
+ * resource, with a goal of selecting a maximum-size set of <b>mutually exclusive elements</b>.
  * 
  */
 public class ActivitySelection {

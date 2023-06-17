@@ -1,11 +1,11 @@
 plugins {
-  id "io.freefair.lombok" version "5.3.0"
+  id "io.freefair.lombok" version "8.0.1"
   id 'checkstyle'
   id "java"
 }
 
-sourceCompatibility = 1.11
-targetCompatibility = 1.11
+sourceCompatibility = 1.18
+targetCompatibility = 1.18
 
 repositories {
   jcenter()
@@ -20,5 +20,5 @@ dependencies {
 }
 
 checkstyle {
-  project.ext.checkstyleVersion = '8.20'
+  project.ext.checkstyleVersion = '8.29'
 }

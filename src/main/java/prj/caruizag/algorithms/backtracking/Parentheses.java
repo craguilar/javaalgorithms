@@ -6,7 +6,7 @@ import java.util.Stack;
 
 /**
  * I decided to start coding (even by copying some of the solutions) backgrating
- * problems because they are difficult for me to undertand and code.
+ * problems because they are difficult for me to understand and code.
  * 
  * @author caruizag
  *
